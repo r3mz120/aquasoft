@@ -1,0 +1,20 @@
+{
+  "development": {
+    "db": {
+      "username": "root",
+      "password": "",
+      "database": "aquasoft1903",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+  },
+  "production": {
+    "db": {
+      "username": "root",
+      "password": "",
+      "database": "aquasoft1903",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+  }
+}
