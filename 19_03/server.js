@@ -4,8 +4,10 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, { cors: { origin: "*" } });
 let port = 8081;
-
+const cors = require("cors");
 app.use(express.json());
+
+app.use(cors({ credentials: true }, "http://localhost:4200"));
 
 io.on("connection", (socket) => {
   console.log(socket.id + " connected!");
