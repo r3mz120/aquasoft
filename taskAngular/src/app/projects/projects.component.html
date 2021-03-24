@@ -15,8 +15,8 @@
     <tr *ngFor="let project of projects; index as i">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ project.project_name }}</td>
-      <td>{{ project.start_date.slice(0, 10) }}</td>
-      <td>{{ project.planned_end_date.slice(0, 10) }}</td>
+      <td>{{ project.start_date }}</td>
+      <td>{{ project.planned_end_date }}</td>
       <td>{{ project.description }}</td>
       <td>{{ project.project_code }}</td>
     </tr>

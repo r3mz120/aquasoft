@@ -8,7 +8,7 @@ const controller = {
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 
@@ -22,11 +22,11 @@ const controller = {
       projectId: req.body.project_id,
     })
       .then(() => {
-        res.status(201).send("Employee added");
+        res.status(201).send({ message: "Employee added" });
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 
@@ -43,18 +43,18 @@ const controller = {
               job_title: req.body.job_title,
               projectId: req.body.project_id,
             })
-            .then(() => res.status(200).send("Employee updated"))
+            .then(() => res.status(200).send({ message: "Employee updated" }))
             .catch((err) => {
               console.log(err);
-              res.status(500).send("Server error");
+              res.status(500).send({ message: "Server error" });
             });
         } else {
-          res.status(404).send("Employee not found");
+          res.status(404).send({ message: "Employee not found" });
         }
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 
@@ -63,11 +63,11 @@ const controller = {
       where: { id: req.body.id },
     })
       .then(() => {
-        res.status(200).send("Employee deleted");
+        res.status(200).send({ message: "Employee deleted" });
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 };

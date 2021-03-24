@@ -16,16 +16,16 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ employee.name }}</td>
       <td>{{ employee.email }}</td>
-      <td>{{ employee.hire_date.slice(0, 10) }}</td>
+      <td>{{ employee.hire_date }}</td>
       <td>{{ employee.salary }}</td>
       <td>{{ employee.job_title }}</td>
       <td>
-        <button class="btn btn-warning w-50" (click)="openModal(template)">
+        <button class="btn btn-warning" (click)="openModal(template, employee)">
           Edit
         </button>
       </td>
       <td>
-        <button class="btn btn-danger w-50" (click)="delete(employee)">
+        <button class="btn btn-danger" (click)="delete(employee)">
           Delete
         </button>
       </td>
@@ -35,7 +35,8 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
+    <h4 class="modal-title pull-left">Edit Employee</h4>
+
     <button
       type="button"
       class="close pull-right"
@@ -45,5 +46,48 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">This is a modal.</div>
+  <div class="modal-body d-flex flex-column align-items-center">
+    <div>
+      <label for="employee-name">Employee name: </label>
+      <input
+        id="employee-name"
+        [(ngModel)]="currentEmployee.name"
+        placeholder="Employee name"
+      />
+    </div>
+    <div>
+      <label for="employee-email">Employee email: </label>
+      <input
+        id="employee-email"
+        [(ngModel)]="currentEmployee.email"
+        placeholder="Employee email"
+      />
+    </div>
+    <div>
+      <label for="employee-hire-date">Employee hire date: </label>
+      <input
+        id="employee-hire-date"
+        [(ngModel)]="currentEmployee.hire_date"
+        placeholder="Employee name"
+      />
+    </div>
+    <div>
+      <label for="employee-salary">Employee Salary: </label>
+      <input
+        id="employee-salary"
+        [(ngModel)]="currentEmployee.salary"
+        placeholder="Employee salary"
+      />
+    </div>
+
+    <div>
+      <label for="employee-job-title">Employee job title: </label>
+      <input
+        id="employee-job-title"
+        [(ngModel)]="currentEmployee.job_title"
+        placeholder="Employee job title"
+      />
+    </div>
+    <Button class="btn btn-primary" (click)="saveEmployee()">Salvare</Button>
+  </div>
 </ng-template>

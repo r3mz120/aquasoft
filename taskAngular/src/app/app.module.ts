@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,8 +15,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     EmployeesComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
-    AppRoutingModule,  HttpClientModule, ModalModule.forRoot()
+    AppRoutingModule,  HttpClientModule, ModalModule.forRoot(),TabsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

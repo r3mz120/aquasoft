@@ -8,7 +8,7 @@ const controller = {
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 
@@ -21,11 +21,11 @@ const controller = {
       project_code: req.body.project_code,
     })
       .then(() => {
-        res.status(201).send("Project added");
+        res.status(201).send({ message: "Project added" });
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 
@@ -41,18 +41,18 @@ const controller = {
               description: req.body.description,
               project_code: req.body.project_code,
             })
-            .then(() => res.status(200).send("Project updated"))
+            .then(() => res.status(200).send({ message: "Project updated" }))
             .catch((err) => {
               console.log(err);
-              res.status(500).send("Server error");
+              res.status(500).send({ message: "Server error" });
             });
         } else {
-          res.status(404).send("Project not found");
+          res.status(404).send({ message: "Project not found" });
         }
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 
@@ -61,11 +61,11 @@ const controller = {
       where: { id: req.body.id },
     })
       .then(() => {
-        res.status(200).send("Project deleted");
+        res.status(200).send({ message: "Project deleted" });
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).send("Server error");
+        res.status(500).send({ message: "Server error" });
       });
   },
 };

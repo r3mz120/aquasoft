@@ -12,11 +12,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class EmployeesComponent implements OnInit {
   modalRef!: BsModalRef;
   employees!:Employee[];
-
+  currentEmployee !:Employee;
   constructor( private employeesService:EmployeesService,private modalService: BsModalService) { }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>,employee:Employee) {
     this.modalRef = this.modalService.show(template);
+    this.currentEmployee = employee;
   }
 
   ngOnInit(): void {
@@ -27,8 +28,15 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.getEmployees().subscribe(employees=>this.employees = employees)
   }
 
+  saveEmployee(): void {
+    this.employeesService.updateEmployee(this.currentEmployee)
+      .subscribe();
+      this.modalRef.hide()
+  }
+
   delete(employee:Employee):void{
-    this.employees = this.employees.splice(this.employees.indexOf(employee)-1,1)
+    // this.employees = this.employees.splice(this.employees.indexOf(employee)-1,1)
+    this.employees = this.employees.filter(e=>e!==employee)
     this.employeesService.deleteEmployee(employee.id).subscribe();
   }
 }
