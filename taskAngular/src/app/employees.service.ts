@@ -11,10 +11,7 @@ export class EmployeesService {
 
   private employeesUrl = 'http://localhost:8081/api/employees';
   private deleteEmployeeUrl = 'http://localhost:8081/api/employees/delete';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
+  
   constructor(private http: HttpClient) { }
 
 
@@ -26,27 +23,35 @@ export class EmployeesService {
   }
 
   updateEmployee(employee: Employee): Observable<any> {
-    return this.http.put(this.employeesUrl + "/update", employee, this.httpOptions).pipe(
+    return this.http.put(this.employeesUrl + "/update", employee, {observe:'response'}).pipe(
       tap(_ => this.log(`updated employee id=${employee.id}`)),
       catchError(this.handleError<any>('updateEmployee'))
     );
   }
 
-  deleteEmployee(id: number): Observable<Employee> {
+  deleteEmployee(id: number): Observable<any> {
     const url = `${this.deleteEmployeeUrl}`;
-    const deleteHttpOptions = {
+    const deleteHttpOptions :Object= {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-      body:{id}
+      body:{id},
+      observe:'response'
      
     };
 
-    return this.http.delete<Employee>(url,deleteHttpOptions).pipe(
+    return this.http.delete(url,deleteHttpOptions).pipe(
       tap(_ => this.log(`deleted employee id=${id}`)),
-      catchError(this.handleError<Employee>('deleteEmployee'))
+      catchError(this.handleError<any>('deleteEmployee'))
     );
   }
 
   
+  addEmployee(employee: Employee): Observable<any> {
+    return this.http.post(this.employeesUrl+"/add", employee,{observe:'response'} ).pipe(
+      tap(_ => this.log(` employee added`)),
+      catchError(this.handleError<any>('addEmployee'))
+    )
+    }
+
   private log(message: string) {
    console.log(message)
   }

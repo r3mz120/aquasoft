@@ -8,6 +8,11 @@ import { EmployeesComponent } from './employees/employees.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +23,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     BrowserModule,
     AppRoutingModule,  HttpClientModule, ModalModule.forRoot(),TabsModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
+  
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

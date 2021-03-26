@@ -5,4 +5,5 @@ export interface Employee{
     hire_date: any,
     salary:number,
     job_title: string,
+    projectId:number,
 }

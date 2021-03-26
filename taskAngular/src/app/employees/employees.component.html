@@ -1,5 +1,11 @@
-<h1>Employees</h1>
-
+<div>
+  <h1>Employees</h1>
+  <span>
+    <Button class="btn btn-warning" (click)="openModal(template, actions.Add)"
+      >Add</Button
+    >
+  </span>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -9,6 +15,7 @@
       <th scope="col">Hire Date</th>
       <th scope="col">Salary</th>
       <th scope="col">Job Title</th>
+      <th scope="col">Project</th>
     </tr>
   </thead>
   <tbody>
@@ -19,8 +26,14 @@
       <td>{{ employee.hire_date }}</td>
       <td>{{ employee.salary }}</td>
       <td>{{ employee.job_title }}</td>
+      <td>{{ employee.projectId }}</td>
       <td>
-        <button class="btn btn-warning" (click)="openModal(template, employee)">
+        <button
+          class="btn btn-warning"
+          (click)="
+            setCurrentEmployee(employee); openModal(template, actions.Edit)
+          "
+        >
           Edit
         </button>
       </td>
@@ -35,7 +48,13 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Edit Employee</h4>
+    <h4 *ngIf="action === actions.Edit" class="modal-title pull-left">
+      Edit Employee
+    </h4>
+
+    <h4 *ngIf="action === actions.Add" class="modal-title pull-left">
+      Add Employee
+    </h4>
 
     <button
       type="button"
@@ -48,15 +67,17 @@
   </div>
   <div class="modal-body d-flex flex-column align-items-center">
     <div>
-      <label for="employee-name">Employee name: </label>
+      <label for="employee-name">Employee name </label>
       <input
+        required
+        minlength="2"
         id="employee-name"
         [(ngModel)]="currentEmployee.name"
         placeholder="Employee name"
       />
     </div>
     <div>
-      <label for="employee-email">Employee email: </label>
+      <label for="employee-email">Employee email </label>
       <input
         id="employee-email"
         [(ngModel)]="currentEmployee.email"
@@ -64,15 +85,15 @@
       />
     </div>
     <div>
-      <label for="employee-hire-date">Employee hire date: </label>
+      <label for="employee-hire-date">Employee hire date </label>
       <input
         id="employee-hire-date"
         [(ngModel)]="currentEmployee.hire_date"
-        placeholder="Employee name"
+        placeholder="Employee hire date"
       />
     </div>
     <div>
-      <label for="employee-salary">Employee Salary: </label>
+      <label for="employee-salary">Employee Salary </label>
       <input
         id="employee-salary"
         [(ngModel)]="currentEmployee.salary"
@@ -81,13 +102,34 @@
     </div>
 
     <div>
-      <label for="employee-job-title">Employee job title: </label>
+      <label for="employee-job-title">Employee job title </label>
       <input
         id="employee-job-title"
         [(ngModel)]="currentEmployee.job_title"
         placeholder="Employee job title"
       />
     </div>
-    <Button class="btn btn-primary" (click)="saveEmployee()">Salvare</Button>
+
+    <div>
+      <label for="employee-project">Employee project </label>
+      <select [(ngModel)]="selectedProject">
+        <option *ngFor="let project of projects" [ngValue]="project">
+          {{ project.project_name }}
+        </option>
+      </select>
+    </div>
+    <Button
+      *ngIf="action === actions.Edit"
+      class="btn btn-primary"
+      (click)="saveEmployee()"
+      >Save</Button
+    >
+
+    <Button
+      *ngIf="action === actions.Add"
+      class="btn btn-primary"
+      (click)="addEmployee()"
+      >Add</Button
+    >
   </div>
 </ng-template>
